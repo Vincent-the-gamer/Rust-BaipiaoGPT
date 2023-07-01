@@ -55,6 +55,33 @@ rust-baipiaogpt.exe 2333 # use your file name!!!!
 | /regenerate       | get      | remove latest question and answer, re-ask the latest question to get new answer | 
 
 
+#### API Parameters
+Only `/chat` has parameter:
+
+you need to give a request body(json):
+
+~~~typescript
+{
+    content: "your question"
+}
+
+// request example using axios
+axios.post("/chat",{
+   content: ""
+}).then(...)
+~~~
+
+For any other API:
+~~~typescript
+axios.get("/xxx").then(...)
+~~~
+
+#### API Test
+You can use `Postman` , `ApiPost` or any api debug tool to test the APIs
+
+![ApiPost](./.github/apipost.png)
+
+
 ## Build
 Rust enviroment required.
 
