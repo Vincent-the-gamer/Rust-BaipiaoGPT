@@ -17,7 +17,7 @@ async fn main() -> std::io::Result<()> {
     } else {
         panic!("命令行参数获取错误");
     }
-    
+
     println!("App running at http://{}:{}", host, port);
 
     HttpServer::new(move || {

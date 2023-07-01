@@ -1,5 +1,6 @@
 use std::{error::Error};
 use serde_json::{Value, json};
+use crate::headers::get_headers;
 use crate::{models::Message, messages};
 use crate::api_key;
 use std::mem::size_of_val;
@@ -8,23 +9,7 @@ use std::mem::size_of_val;
 // 发请求和AI聊天
 pub async fn chat(content: &str) -> Result<String, Box<dyn Error>> {
     // 请求头
-    let headers = headermap![
-        "Accept" => "application/json, text/plain, */*",
-        "Accept-Encoding" => "gzip, deflate, br",
-        "Accept-Language" => "zh-CN",
-        "Access-Control-Allow-Origin" => "*",
-        "Connection" => "keep-alive",
-        "Content-Type" => "application/json",
-        "Host" => "api.aigcfun.com",
-        "sec-ch-ua" => "\"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"108\"",
-        "sec-ch-ua-mobile" => "?0",
-        "sec-ch-ua-platform" => "\"Windows\"",
-        "Sec-Fetch-Dest" => "empty",
-        "Sec-Fetch-Mode" => "cors",
-        "Sec-Fetch-Site" => "cross-site",
-        "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ai-edu/0.0.2 Chrome/108.0.5359.215 Electron/22.3.5 Safari/537.36",
-        "x-f-platform" => "win32"
-    ];
+    let headers = get_headers();
 
     messages::insert_message(
         Message::new("user", content)
@@ -124,23 +109,7 @@ fn cal_total_token_length() -> usize{
 
 // 请求新的api key
 pub async fn request_api_key() -> Result<(), Box<dyn Error>>{
-    let headers = headermap![
-        "Accept" => "application/json, text/plain, */*",
-        "Accept-Encoding" => "gzip, deflate, br",
-        "Accept-Language" => "zh-CN",
-        "Access-Control-Allow-Origin" => "*",
-        "Connection" => "keep-alive",
-        "Content-Type" => "application/json",
-        "Host" => "api.aigcfun.com",
-        "sec-ch-ua" => "\"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"108\"",
-        "sec-ch-ua-mobile" => "?0",
-        "sec-ch-ua-platform" => "\"Windows\"",
-        "Sec-Fetch-Dest" => "empty",
-        "Sec-Fetch-Mode" => "cors",
-        "Sec-Fetch-Site" => "cross-site",
-        "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ai-edu/0.0.2 Chrome/108.0.5359.215 Electron/22.3.5 Safari/537.36",
-        "x-f-platform" => "win32"
-    ];
+    let headers = get_headers();
 
     let client = reqwest::Client::new();
     let resp = client.get("https://api.aigcfun.com/fc/key")
@@ -165,23 +134,7 @@ pub async fn request_api_key() -> Result<(), Box<dyn Error>>{
 
 // 验证api key
 pub async fn verify_key(api_key: String) -> Result<(), Box<dyn Error>>{
-    let headers = headermap![
-        "Accept" => "application/json, text/plain, */*",
-        "Accept-Encoding" => "gzip, deflate, br",
-        "Accept-Language" => "zh-CN",
-        "Access-Control-Allow-Origin" => "*",
-        "Connection" => "keep-alive",
-        "Content-Type" => "application/json",
-        "Host" => "api.aigcfun.com",
-        "sec-ch-ua" => "\"Not?A_Brand\";v=\"8\", \"Chromium\";v=\"108\"",
-        "sec-ch-ua-mobile" => "?0",
-        "sec-ch-ua-platform" => "\"Windows\"",
-        "Sec-Fetch-Dest" => "empty",
-        "Sec-Fetch-Mode" => "cors",
-        "Sec-Fetch-Site" => "cross-site",
-        "User-Agent" => "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) ai-edu/0.0.2 Chrome/108.0.5359.215 Electron/22.3.5 Safari/537.36",
-        "x-f-platform" => "win32"
-    ];
+    let headers = get_headers();
 
     let client = reqwest::Client::new();
     client.get(
