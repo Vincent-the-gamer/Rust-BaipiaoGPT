@@ -1,5 +1,21 @@
 # Rust-BaipiaoGPT
-Free talking with gpt-3.5-turbo.
+Free chatting with gpt-3.5-turbo.
+
+## Use with frontend
+You can use this server with my web page.
+
+Link: [https://github.com/Vincent-the-gamer/BaipiaoGPT-WebUI](https://github.com/Vincent-the-gamer/BaipiaoGPT-WebUI)
+
+Clone this repo and modify `utils/axios.ts`,
+change `baseURL` to your server host and port.
+
+~~~typescript
+// 有上下文的后端接口
+export const axiosWithContext: AxiosInstance = axios.create({
+    baseURL: "http://localhost:8081"
+})
+~~~
+
 
 ## Features
 * multi-platform
