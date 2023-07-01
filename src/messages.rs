@@ -28,3 +28,9 @@ pub fn clear_message() {
     messages.clear();
     messages.push(Message::new("system", "请以markdown的形式返回答案"));
 }
+
+// 删除最后的两条消息
+pub fn remove_last_two_messages() {
+    let mut messages = MESSAGES.lock().unwrap();
+    messages.resize(get_messages().len() - 2, Message::new("user", ""))
+}

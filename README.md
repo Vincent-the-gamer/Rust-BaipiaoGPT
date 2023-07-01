@@ -1,17 +1,52 @@
-# Rust！白嫖！G！P！T！
-作为Rust自学实战的第一个小练习成果吧，做了个AI模型对话的后端服务。
+# Rust-BaipiaoGPT
+Free talking with gpt-3.5-turbo.
 
-还没完善，之后看看能不能打包成一个应用。
+## Features
+* multi-platform
+* chat with context
+* dynamic port binding
+* cross origin
 
-## 特性
-* 连续上下文对话
-* 手动调用接口清空上下文
+## Usage
 
-## 从源代码构建
-需要Rust环境(rustup, cargo, rustc)
+### Run with default port: 
+Default Port: 8080
+~~~shell
+# darwin/linux
+./rust-baipiaogpt
+
+# windows
+rust-baipiaogpt.exe
+~~~
+
+### Run with custom port: 
+~~~shell
+# darwin/linux
+./rust-baipiaogpt 2333
+
+# windows
+rust-baipiaogpt.exe 2333
+~~~
+
+
+### APIs
+
+| URL               | Method   | Description                                              |     
+| :---------------- | -------- | -------------------------------------------------------- |
+| /chat             | post     | Return the response of AI, save contexts in an array     | 
+| /clearContext     | get      | clear context                                            | 
+| /showContextCount | get      | get count of current contexts                            | 
+| /regenerate       | get      | remove latest question and answer, re-ask the latest question to get new answer | 
+
+
+## Build
+Rust enviroment required.
+
+Install Rust: [https://www.rust-lang.org/](https://www.rust-lang.org/)
 
 ~~~shell
 git clone https://github.com/Vincent-the-gamer/Rust-BaipiaoGPT.git
-cargo run # 调试
-cargo build # 构建
+cargo run # debug
+cargo build # test build
+cargo build --release # release
 ~~~
