@@ -7,7 +7,7 @@ use std::env;
 async fn main() -> std::io::Result<()> {
     // 接收命令行参数, 绑定动态端口
     let args: Vec<String> = env::args().collect();
-    let host = "127.0.0.1";
+    let host = "0.0.0.0";
     let port: u16;
     // 如果没有传参，默认8080
     if args.len() == 1 {
