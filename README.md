@@ -13,19 +13,19 @@ Free talking with gpt-3.5-turbo.
 Default Port: 8080
 ~~~shell
 # darwin/linux
-./rust-baipiaogpt
+./rust-baipiaogpt  # use your file name!!!!
 
 # windows
-rust-baipiaogpt.exe
+rust-baipiaogpt.exe  # use your file name!!!!
 ~~~
 
 ### Run with custom port: 
 ~~~shell
 # darwin/linux
-./rust-baipiaogpt 2333
+./rust-baipiaogpt 2333 # use your file name!!!!
 
 # windows
-rust-baipiaogpt.exe 2333
+rust-baipiaogpt.exe 2333 # use your file name!!!!
 ~~~
 
 
