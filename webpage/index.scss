@@ -1,0 +1,14 @@
+@font-face {
+    font-family: LXGW Wenkai;
+    src: url("assets/fonts/LXGWWenKai-Regular.ttf");
+}
+
+html{
+    background-color: rgba(102, 0, 255, 0.676);
+    color: white;
+    font-family: LXGW Wenkai;
+    a{
+        text-decoration: none;
+        color: white;
+    }
+}

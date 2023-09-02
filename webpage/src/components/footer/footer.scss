@@ -1,0 +1,59 @@
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(191, 0, 255, 0.567);
+    min-height: 80px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .input-area{
+        position: relative;
+        left: 15px;
+        width: 80%;
+        height: fit-content;
+        margin: 0 auto;
+        textarea{
+            position: relative;
+            top: 10px;
+            width: 80%;
+            max-height: 170px;
+            min-height: 50px;
+            background-color: transparent;
+            border-radius: 5px;
+            border: 3px solid yellow;
+            color: white;
+            font-family: LXGW Wenkai;
+            font-size: 18px;
+            transition: all, 0.3s;
+            resize: none; /* 禁止用户调整文本框的大小 */
+            &:focus{
+                background-color: rgb(116, 46, 116);
+                cursor: pointer;
+                transform: scale(101%, 101%);
+            }
+        }
+        .send{
+            position: relative;
+            margin: 0 5px;
+            height: 50px;
+            width: 100px;
+            top: -10px;
+            background-color: transparent;
+            border-radius: 5px;
+            border: 3px solid yellow;
+            color: white;
+            font-family: LXGW Wenkai;
+            font-size: 18px;
+            transition: all, 0.3s;
+            &:hover{
+                background-color: plum;
+                cursor: pointer;
+            }
+        }
+        
+    }
+}

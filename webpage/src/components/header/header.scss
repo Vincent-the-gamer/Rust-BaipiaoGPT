@@ -1,0 +1,58 @@
+$header-height: 40px;
+
+header{
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: $header-height;
+    background-color: rgba(0, 115, 255, 0.584);
+    h1{
+        position: relative;
+        top: -8px;
+        width: 100%;
+        margin: 0;
+        display: inline;
+    }
+    img{
+        position: relative;
+        height: 100%;
+        margin: 0;
+    }
+    a{
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: $header-height;
+        $a-width: 150px;
+        width: $a-width;
+        button{
+            position: relative;
+            height: 100%;
+            width: $a-width;
+            background-color: transparent;
+            border: 3px solid yellow;
+            font-family: LXGW Wenkai;
+            border-radius: 5px;
+            color: white;
+            font-size: 25px;
+            transition: all, 0.3s;
+            &:hover{
+                cursor: pointer;
+                background-color: rgb(138, 230, 0);
+                color: black;
+            }
+            img{
+                position: relative;
+                height: 100%;
+                display: inline;
+            }
+            span{
+                position: relative;
+                margin: 0 5px;
+                top: -8px;
+            }
+        } 
+    }
+}

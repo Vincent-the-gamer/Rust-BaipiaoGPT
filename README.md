@@ -1,31 +1,31 @@
 # Rust-BaipiaoGPT
 Free chatting with gpt-3.5-turbo.
 
-## Use with frontend
-You can use this server with my web page.
+## WebAssembly web page(In Progress)
+~~~shell
+cd webpage
+trunk build --release
+~~~
+Open webpage to chat with AI. 
 
-Link: [https://github.com/Vincent-the-gamer/BaipiaoGPT-WebUI](https://github.com/Vincent-the-gamer/BaipiaoGPT-WebUI)
+`WebAssembly` page has no backend server. So we can directly deploy it on `GitHub Pages`.
 
-Clone this repo and modify `utils/axios.ts`,
-change `baseURL` to your server host and port.
 
-~~~typescript
-// 有上下文的后端接口
-export const axiosWithContext: AxiosInstance = axios.create({
-    baseURL: "http://localhost:8081"
-})
+## Use core as http service
+~~~shell
+cd server
+cargo build --release
 ~~~
 
-
-## Features
+### Features
 * multi-platform
 * chat with context
 * dynamic port binding
 * cross origin
 
-## Usage
+### Usage
 
-### Run with default port: 
+#### Run with default port: 
 Default Port: 8080
 ~~~shell
 # darwin/linux
@@ -35,7 +35,7 @@ Default Port: 8080
 rust-baipiaogpt.exe  # use your file name!!!!
 ~~~
 
-### Run with custom port: 
+#### Run with custom port: 
 ~~~shell
 # darwin/linux
 ./rust-baipiaogpt 2333 # use your file name!!!!
@@ -45,7 +45,7 @@ rust-baipiaogpt.exe 2333 # use your file name!!!!
 ~~~
 
 
-### APIs
+#### APIs
 
 | URL               | Method   | Description                                              |     
 | :---------------- | -------- | -------------------------------------------------------- |
@@ -55,7 +55,7 @@ rust-baipiaogpt.exe 2333 # use your file name!!!!
 | /regenerate       | get      | remove latest question and answer, re-ask the latest question to get new answer | 
 
 
-#### API Parameters
+##### API Parameters
 Only `/chat` has parameter:
 
 you need to give a request body(json):
@@ -76,20 +76,7 @@ For any other API:
 axios.get("/xxx").then(...)
 ~~~
 
-#### API Test
+##### API Test
 You can use `Postman` , `ApiPost` or any api debug tool to test the APIs
 
 ![ApiPost](./.github/apipost.png)
-
-
-## Build
-Rust enviroment required.
-
-Install Rust: [https://www.rust-lang.org/](https://www.rust-lang.org/)
-
-~~~shell
-git clone https://github.com/Vincent-the-gamer/Rust-BaipiaoGPT.git
-cargo run # debug
-cargo build # test build
-cargo build --release # release
-~~~
