@@ -11,7 +11,9 @@ trunk build --release
 ~~~
 Open webpage to chat with AI. 
 
-`WebAssembly` page has no backend server. So we can directly deploy it on `GitHub Pages`.
+`WebAssembly` page has no backend server. 
+
+So we can directly deploy it on `GitHub Pages`.
 
 
 ## Use core as http service

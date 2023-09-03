@@ -1,5 +1,6 @@
+use gloo_console::log;
 use stylist::{yew::styled_component, Style};
-use web_sys::HtmlTextAreaElement;
+use web_sys::{HtmlTextAreaElement, MouseEvent};
 use yew::{Html, html, Callback, use_node_ref};
 use yewdux::prelude::use_store;
 
@@ -31,8 +32,42 @@ pub fn footer() -> Html{
         })
     };
 
+
     // sync store to textarea
-    let (state, _) = use_store::<InputContent>();
+    let (store_state, dispatch) = use_store::<InputContent>();
+    
+    // textarea onchange
+    let textarea_change = {
+        let textarea_ref = textarea_ref.clone();
+        let dispatch = dispatch.clone();
+
+        Callback::from(move |_| {
+            let text_area = textarea_ref.cast::<HtmlTextAreaElement>();
+    
+            if let Some(text_area) = text_area {
+                dispatch.set(
+                    InputContent { 
+                        text: text_area.value()
+                    }
+                )
+            }
+        })
+    };
+
+    // send message
+    let send = {
+        let state = store_state.clone();
+        let dispatch = dispatch.clone();
+        Callback::from(move |e: MouseEvent| {
+            log!(&state.text);
+            dispatch.set(
+                InputContent{
+                    text: String::from("")
+                }
+            );
+        })
+    };
+
     
     html!{
         <div class={stylesheet}>
@@ -40,10 +75,14 @@ pub fn footer() -> Html{
                 <div class="input-area">
                     <textarea ref={textarea_ref} 
                               oninput={input_change_style}
+                              onchange={textarea_change}
                               placeholder="输入问题，拷打GPT!"
-                              value={ state.text.clone() }
+                              value={ store_state.text.clone() }
                     />
-                    <button class="send">{"发送"}</button>
+                    <button class="send"
+                            onclick={ send }>
+                            {"发送"}
+                    </button>
                 </div>
             </footer>
         </div>
