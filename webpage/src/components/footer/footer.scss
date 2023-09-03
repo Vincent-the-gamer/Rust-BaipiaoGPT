@@ -3,7 +3,7 @@ footer{
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(191, 0, 255, 0.567);
+    background-color: rgba(102, 0, 255, 0.567);
     min-height: 80px;
     height: fit-content;
     display: flex;
@@ -34,6 +34,9 @@ footer{
                 background-color: rgb(116, 46, 116);
                 cursor: pointer;
                 transform: scale(101%, 101%);
+            }
+            &::placeholder{
+                color: white;
             }
         }
         .send{

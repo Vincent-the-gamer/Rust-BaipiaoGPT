@@ -517,6 +517,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "core"
+version = "1.0.0"
+dependencies = [
+ "lazy_static",
+ "reqwest",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "core-foundation"
 version = "0.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1907,9 +1917,7 @@ version = "1.0.0"
 dependencies = [
  "actix-cors",
  "actix-web",
- "lazy_static",
- "reqwest",
- "serde",
+ "core",
  "serde_json",
  "tokio",
 ]
@@ -2387,6 +2395,7 @@ dependencies = [
 name = "webpage"
 version = "1.0.0"
 dependencies = [
+ "core",
  "getrandom",
  "gloo-console 0.3.0",
  "grass",

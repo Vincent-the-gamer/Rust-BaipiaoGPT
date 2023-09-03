@@ -1,6 +1,7 @@
 use std::sync::Mutex;
 use lazy_static::lazy_static;
 use reqwest::header::HeaderMap;
+use crate::headermap;
 
 // 全局请求头
 lazy_static! {

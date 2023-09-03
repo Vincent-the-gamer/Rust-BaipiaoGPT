@@ -1,4 +1,4 @@
-use std::{error::Error};
+use std::error::Error;
 use serde_json::{Value, json};
 use crate::headers::get_headers;
 use crate::{models::Message, messages};
