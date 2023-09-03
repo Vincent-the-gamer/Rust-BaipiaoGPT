@@ -1,6 +1,9 @@
 use stylist::{yew::styled_component, Style};
 use web_sys::HtmlTextAreaElement;
 use yew::{Html, html, Callback, use_node_ref};
+use yewdux::prelude::use_store;
+
+use crate::store::InputContent;
 
 const CSS: &str = grass::include!("webpage/src/components/footer/footer.scss");
 
@@ -28,6 +31,8 @@ pub fn footer() -> Html{
         })
     };
 
+    // sync store to textarea
+    let (state, _) = use_store::<InputContent>();
     
     html!{
         <div class={stylesheet}>
@@ -35,7 +40,9 @@ pub fn footer() -> Html{
                 <div class="input-area">
                     <textarea ref={textarea_ref} 
                               oninput={input_change_style}
-                              placeholder="输入问题，拷打GPT!"/>
+                              placeholder="输入问题，拷打GPT!"
+                              value={ state.text.clone() }
+                    />
                     <button class="send">{"发送"}</button>
                 </div>
             </footer>

@@ -1,5 +1,8 @@
-# Rust-BaipiaoGPT
-Free chatting with gpt-3.5-turbo.
+<p align="center">
+    <img src=".github/logo.png" style="height: 80px;"/>
+</p>
+<h1 align="center">Rust-BaipiaoGPT</h1>
+<p align="center">Free chatting with gpt-3.5-turbo.</p>
 
 ## WebAssembly web page(In Progress)
 ~~~shell

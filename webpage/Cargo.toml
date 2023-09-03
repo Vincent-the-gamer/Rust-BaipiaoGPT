@@ -13,3 +13,5 @@ yew = { version = "0.20.0", features = ["csr"] }
 yewdux = "0.9.3"
 gloo-console = "0.3.0"
 core = { path = "../core" }
+serde_json = "1.0.105"
+serde = { version = "1.0.188", features = ["derive"] }
