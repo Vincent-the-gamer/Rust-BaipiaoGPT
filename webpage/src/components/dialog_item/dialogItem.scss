@@ -1,0 +1,32 @@
+.dialog-item{
+    position: relative;
+    height: fit-content;
+    background-color: rgba(0, 0, 0, 0.515);
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    margin: 10px auto;
+    transition: all, 0.4s;
+
+    strong{
+        font-weight: bolder;
+    }
+
+    h1, h2, h3, h4, h5, h6{
+        padding: 10px;
+        width: fit-content;
+        height: fit-content;
+    }
+    img{
+        position: relative;
+        margin: 0 8px;
+        $side: 70px;
+        width: $side;
+        height: $side;
+    }
+    &:hover{
+        box-shadow: 0 0 20px yellow;
+    }
+}

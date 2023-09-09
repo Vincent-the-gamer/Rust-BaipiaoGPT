@@ -4,3 +4,8 @@ use yewdux::store::Store;
 pub struct InputContent{
     pub text: String
 }
+
+#[derive(PartialEq, Eq, Default, Store, Clone)]
+pub struct DialogStore {
+    pub len: usize
+}

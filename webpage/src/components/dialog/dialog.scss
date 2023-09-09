@@ -1,0 +1,36 @@
+main{
+    position: relative;
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .dialog-area{
+        position: relative;
+        width: 80%;
+        padding-bottom: 100px;
+    }
+
+    .clear{
+        position: fixed;
+        top: 45px;
+        left: 10px;
+        background-color: transparent;
+        width: 100px;
+        height: 35px;
+        font-family: LXGW Wenkai;
+        font-size: 15px;
+        color: white;
+        border: 2px solid deepskyblue;
+        border-radius: 5px;
+        transition: all, 0.4s;
+        z-index: 3;
+        &:hover{
+           background-color: aquamarine;
+           color: black;
+           cursor: pointer;
+        }
+    }
+}
