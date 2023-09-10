@@ -3,9 +3,13 @@
     src: url("assets/fonts/LXGWWenKai-Regular.ttf");
 }
 
+@font-face {
+    font-family: DM Mono;
+    src: url("assets/fonts/dm-mono.ttf");
+}
+
 html {
     background-color: rgba(50, 0, 124, 0.676);
-    color: white;
     font-family: LXGW Wenkai;
 
     a {

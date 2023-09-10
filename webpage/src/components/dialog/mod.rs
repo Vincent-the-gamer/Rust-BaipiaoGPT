@@ -1,6 +1,5 @@
 use core::messages;
 
-use gloo_console::log;
 use stylist::{yew::styled_component, Style};
 use yew::{Html, html};
 use yewdux::prelude::use_store;
@@ -25,6 +24,7 @@ pub fn dialog() -> Html{
 
     let msg_list = messages::get_messages();
 
+
     html!{
         <div class={stylesheet}>
             <main>
@@ -32,9 +32,8 @@ pub fn dialog() -> Html{
                 <div class="dialog-area">
                     {
                         msg_list[1..].iter().map(|msg|{
-                            log!(msg.role.to_owned(), msg.content.to_owned());
                             html!{
-                                <DialogItem role={msg.role.to_owned()} content={msg.content.to_owned()}/>
+                                <DialogItem role={msg.role.to_owned()} content={msg.content.to_owned()} />
                             }
                         }).collect::<Html>()
                     }

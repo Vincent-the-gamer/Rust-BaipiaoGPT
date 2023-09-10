@@ -24,13 +24,13 @@ cargo build --release
 
 ### Features
 * multi-platform
-* chat with context
+* context
 * dynamic port binding
 * cross origin
 
 ### Usage
 
-#### Run with default port: 
+#### Run at default port: 
 Default Port: 8080
 ~~~shell
 # darwin/linux
@@ -40,7 +40,7 @@ Default Port: 8080
 rust-baipiaogpt.exe  # use your file name!!!!
 ~~~
 
-#### Run with custom port: 
+#### Run at custom port: 
 ~~~shell
 # darwin/linux
 ./rust-baipiaogpt 2333 # use your file name!!!!
@@ -55,9 +55,9 @@ rust-baipiaogpt.exe 2333 # use your file name!!!!
 | URL               | Method   | Description                                              |     
 | :---------------- | -------- | -------------------------------------------------------- |
 | /chat             | post     | Return the response of AI, save contexts in an array     | 
-| /clearContext     | get      | clear context                                            | 
-| /showContextCount | get      | get count of current contexts                            | 
-| /regenerate       | get      | remove latest question and answer, re-ask the latest question to get new answer | 
+| /clearContext     | get      | Clear context                                            | 
+| /showContextCount | get      | Get count of current contexts                            | 
+| /regenerate       | get      | Remove latest question and answer, re-ask the latest question to get new answer | 
 
 
 ##### API Parameters
@@ -73,12 +73,16 @@ you need to give a request body(json):
 // request example using axios
 axios.post("/chat",{
    content: ""
-}).then(...)
+}).then(res => {
+    console.log(res.data)
+})
 ~~~
 
 For any other API:
 ~~~typescript
-axios.get("/xxx").then(...)
+axios.get("/xxx").then(res => {
+    console.log(res.data)
+})
 ~~~
 
 ##### API Test

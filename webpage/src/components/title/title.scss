@@ -6,6 +6,7 @@ main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: white;
     .title{
         position: relative;
         margin: 30px auto;
@@ -31,9 +32,10 @@ main{
                 border-radius: 7px;
                 box-shadow: 0 0 20px plum;
                 --a: 8deg;
-                transform: perspective(400px) rotate3d(var(--r,1,-1,0),calc(var(--i,1)*var(--a)));
+                transform: perspective(400px) rotate3d(var(--r,1,-1,0),calc(var(--i,1)*var(--a))) scale(95%, 95%);
                 mask: linear-gradient(135deg,#000c 40%,#000,#000c 60%)100% 100%/250% 250%;
                 transition: all, 0.4s;
+                box-shadow: 0 0 20px black;
                 &:hover{
                     transform: scale(103%, 103%);
                     box-shadow: 0 0 20px paleturquoise;

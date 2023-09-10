@@ -65,6 +65,9 @@ pub fn footer() -> Html{
             messages::insert_message(
                 Message::new("user", &state.text)
             );
+            messages::insert_message(
+                Message::new("assistant", &state.text)
+            );
             input_dispatch.set(
                 InputContent{
                     text: String::from("")
@@ -83,7 +86,6 @@ pub fn footer() -> Html{
                               onchange={textarea_change}
                               placeholder="输入问题，拷打GPT!"
                               value={ store_state.text.clone() }
-                              auto-height="true"
                     />
                     <button class="send"
                             onclick={ send }>
