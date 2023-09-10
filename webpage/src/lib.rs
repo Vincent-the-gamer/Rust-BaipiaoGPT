@@ -24,7 +24,8 @@ pub fn app() -> Html {
         // onMounted
         dialog_dispatch.set(
             DialogStore {
-                len: messages::len()
+                len: messages::len(),
+                messages: messages::get_messages()
             }
         );
 

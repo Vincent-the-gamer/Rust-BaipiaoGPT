@@ -1,4 +1,4 @@
-use core::messages;
+use core::{messages, services::clear_context};
 
 use stylist::{yew::styled_component, Style};
 use yew::{Html, html};
@@ -14,16 +14,13 @@ const CSS: &str = grass::include!("webpage/src/components/dialog/dialog.scss");
 #[styled_component(Dialog)]
 pub fn dialog() -> Html{
     let stylesheet = Style::new(CSS).unwrap();
-    let (_, dialog_dispatch) = use_store::<DialogStore>();
+    let (dialog_state, dialog_dispatch) = use_store::<DialogStore>();
 
     // clear context
     let clear_context = dialog_dispatch.reduce_mut_callback(|dialog| {
-        messages::clear_message();
+        clear_context();
         dialog.len = messages::len();
     });
-
-    let msg_list = messages::get_messages();
-
 
     html!{
         <div class={stylesheet}>
@@ -31,7 +28,7 @@ pub fn dialog() -> Html{
                 <button class="clear" onclick={ clear_context }>{"清空对话"}</button>
                 <div class="dialog-area">
                     {
-                        msg_list[1..].iter().map(|msg|{
+                        dialog_state.messages.iter().map(|msg|{
                             html!{
                                 <DialogItem role={msg.role.to_owned()} content={msg.content.to_owned()} />
                             }

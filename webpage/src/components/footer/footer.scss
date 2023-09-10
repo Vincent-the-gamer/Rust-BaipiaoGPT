@@ -61,6 +61,12 @@ footer{
                 background-color: plum;
                 cursor: pointer;
             }
+            &:disabled{
+                border: 3px solid gray;
+                background-color: rgba(0, 0, 0, 0.465);
+                color: gray;
+                cursor: not-allowed;
+            }
         }
         
     }
