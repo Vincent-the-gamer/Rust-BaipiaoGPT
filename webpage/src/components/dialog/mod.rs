@@ -1,4 +1,4 @@
-use core::{messages, services::clear_context};
+use core::{services::clear_context, messages};
 
 use stylist::{yew::styled_component, Style};
 use yew::{Html, html};
@@ -19,7 +19,7 @@ pub fn dialog() -> Html{
     // clear context
     let clear_context = dialog_dispatch.reduce_mut_callback(|dialog| {
         clear_context();
-        dialog.len = messages::len();
+        dialog.init_dialog();
     });
 
     html!{

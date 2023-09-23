@@ -18,16 +18,12 @@ use crate::store::DialogStore;
 #[styled_component(App)]
 pub fn app() -> Html {
     let (dialog_state, dialog_dispatch) = use_store::<DialogStore>();
-    let dialog_len = dialog_state.len;
 
     use_effect(move || {
         // onMounted
-        dialog_dispatch.set(
-            DialogStore {
-                len: messages::len(),
-                messages: messages::get_messages()
-            }
-        );
+        dialog_dispatch.reduce_mut(|dialog| {
+            dialog.init_dialog();
+        });
 
         // onBeforeUnmount
         // || messages::clear_message()
@@ -36,7 +32,7 @@ pub fn app() -> Html {
     html!{
         <div>
             <Header/>
-            if dialog_len <= 1 {  // the minimum len is 1, which is the message to tell AI to use markdown.
+            if dialog_state.messages.len() <= 1 {  // the minimum len is 1, which is the message to tell AI to use markdown.
                 <Title/>
             } else {
                 <Dialog/>

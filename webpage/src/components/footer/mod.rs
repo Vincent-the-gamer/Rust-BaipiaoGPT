@@ -1,12 +1,10 @@
-use core::{messages, services::chat};
-
-use gloo_console::log;
 use stylist::{yew::styled_component, Style};
-use web_sys::HtmlTextAreaElement;
-use yew::{Html, html, Callback, use_node_ref};
+use wasm_bindgen_futures::spawn_local;
+use web_sys::{HtmlTextAreaElement};
+use yew::{Html, html, Callback, use_node_ref, use_state};
 use yewdux::prelude::use_store;
 
-use crate::store::{InputContent, DialogStore};
+use crate::store::{InputContent, DialogStore, DialogMessage};
 
 const CSS: &str = grass::include!("webpage/src/components/footer/footer.scss");
 
@@ -37,7 +35,18 @@ pub fn footer() -> Html{
 
     // sync store to textarea
     let (store_state, input_dispatch) = use_store::<InputContent>();
-    let (_, dialog_dispatch) = use_store::<DialogStore>();
+    let (dialog_state, dialog_dispatch) = use_store::<DialogStore>();
+
+    // when chat requesting, disable send button
+    let is_requesting = use_state(|| false);
+
+    let disable_input: bool = {
+        if store_state.text.clone() == String::from("") { 
+            true
+        } else {
+            *is_requesting
+        }
+    };
     
     // textarea oninput
     let textarea_input = {
@@ -62,26 +71,41 @@ pub fn footer() -> Html{
         let state = store_state.clone();
         let input_dispatch = input_dispatch.clone();
         let dialog_dispatch = dialog_dispatch.clone();
+        let is_requesting = is_requesting.clone();
 
         if state.text.clone() != String::from(""){
             dialog_dispatch.reduce_mut_callback(move |dialog| {
-                dialog.messages = messages::get_messages();
-                let text = state.text.clone();
-                wasm_bindgen_futures::spawn_local(async move {
-                    let result = chat(text.as_str()).await.unwrap();
-                    log!(result);
-                });
 
-                input_dispatch.set(
-                    InputContent{
-                        text: String::from("")
+                let text = state.text.clone();
+
+                dialog.insert_dialog(
+                    DialogMessage {
+                        role: String::from("user"), 
+                        content: text.clone()
                     }
                 );
 
-                dialog.len = messages::len();
+                is_requesting.set(true);
+                
+                let mut dialog = dialog.clone();
+                let is_requesting = is_requesting.clone();
+                let input_dispatch = input_dispatch.clone();
+
+                spawn_local(async move {
+                    match dialog.request_dialog(String::from("sa")).await {
+                        Ok(()) => {
+                            dialog.init_dialog();
+                            is_requesting.set(false);
+                            input_dispatch.reduce_mut(|input| {
+                                input.clear();
+                            });
+                        },
+                        _ => ()
+                    }
+                });
             })
         } else {
-            Callback::from(|_| {})
+            Callback::from(move |_| {})
         }
     };
 
@@ -96,7 +120,7 @@ pub fn footer() -> Html{
                               value={ store_state.text.clone() }
                     />
                     <button class="send"
-                            disabled={ store_state.text.clone() == String::from("") }
+                            disabled={ disable_input }
                             onclick={ send }>
                             {"发送"}
                     </button>
