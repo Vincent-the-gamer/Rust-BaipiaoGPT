@@ -4,22 +4,24 @@
     background-color: rgba(0, 0, 0, 0.515);
     color: white;
     border-radius: 7px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: left;
     margin: 10px auto;
     transition: all, 0.4s;
     padding: 10px;
-    white-space: pre;
+    white-space: pre-wrap;
+    display: flex;
+    flex-direction: column;
 
-    *{
-        margin: 0;
+    .content {
+        position: relative;
+        left: 80px;
+        margin: 0 5px;
+        top: -70px;
+        width: calc(100% - 80px);
     }
 
     img{
         position: relative;
-        margin: 0 8px;
+        margin: 0 5px;
         $side: 70px;
         width: $side;
         height: $side;
@@ -28,7 +30,7 @@
     pre{
         code {
             font-family: DM Mono;
-            font-size: 17px;
+            font-size: 15px;
         }
     }
 

@@ -1,4 +1,4 @@
-use core::{messages, models::Message, services::chat};
+use core::{messages, services::chat};
 
 use yewdux::store::Store;
 
@@ -11,12 +11,12 @@ pub struct DialogStore {
 
 impl DialogStore {
     pub fn insert_dialog(&mut self, dialog: DialogMessage){
-        messages::insert_message(
-            Message {
-                role: dialog.role.to_owned(),
-                content: dialog.content.to_owned()
-            }
-        );
+        // messages::insert_message(
+        //     Message {
+        //         role: dialog.role.to_owned(),
+        //         content: dialog.content.to_owned()
+        //     }
+        // );
         self.messages.push(dialog);
     }
 

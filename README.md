@@ -4,7 +4,10 @@
 <h1 align="center">Rust-BaipiaoGPT</h1>
 <p align="center">Free chatting with gpt-3.5-turbo.</p>
 
-## WebAssembly web page(In Progress)
+## Notice
+This chat backend is no longer supporting context now due to some reason.
+
+## WebAssembly web page
 ~~~shell
 cd webpage
 trunk build --release
@@ -24,9 +27,9 @@ cargo build --release
 
 ### Features
 * multi-platform
-* context
 * dynamic port binding
 * cross origin
+* WebAssembly
 
 ### Usage
 

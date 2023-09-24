@@ -27,18 +27,20 @@ pub fn dialog_item(props: &Props) -> Html {
             if props.role == String::from("user") || props.role == "user" {
                 <div class="dialog-item">
                     <img src="assets/imgs/avatar_user.jpg" alt="avatar"/>
-                    <h3>{ &props.content }</h3>
+                    <h4 class="content">{ &props.content }</h4>   
                 </div>
             } else if props.role == String::from("assistant") || props.role == "assistant" {
                 <div class="dialog-item">
                     <img src="assets/imgs/avatar_assistant.jpg" alt="avatar"/>
-                    {          
-                        Html::from_html_unchecked(
-                            AttrValue::from(
-                                markdown::to_html(props.content.as_str())
+                    <span class="content">
+                        {          
+                            Html::from_html_unchecked(
+                                AttrValue::from(
+                                    markdown::to_html(props.content.as_str())
+                                )
                             )
-                        )
-                    }
+                        }
+                    </span>
                 </div>
             } else {
                 <p></p>

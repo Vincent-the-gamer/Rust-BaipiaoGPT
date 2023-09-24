@@ -3,6 +3,7 @@ mod store;
 
 use core::messages;
 
+use store::is_requesting::IsRequesting;
 use stylist::yew::styled_component;
 use yew::{ Html, html, use_effect_with_deps };
 
@@ -19,11 +20,15 @@ use crate::store::dialog_store::DialogStore;
 #[styled_component(App)]
 pub fn app() -> Html {
     let (dialog_state, dialog_dispatch) = use_store::<DialogStore>();
+    let (_, req_dispatch) = use_store::<IsRequesting>();
 
     use_effect_with_deps(move |_| {
         // onMounted
         dialog_dispatch.reduce_mut(|dialog| {
             dialog.init_dialog();
+        });
+        req_dispatch.reduce_mut(|req| {
+            req.set(false);
         });
 
         // onBeforeUnmount

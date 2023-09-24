@@ -1,12 +1,11 @@
-use gloo_console::log;
 use stylist::{yew::styled_component, Style};
 use wasm_bindgen_futures::spawn_local;
 use web_sys::HtmlTextAreaElement;
-use yew::{html, use_node_ref, use_state, Callback, Html};
+use yew::{html, use_node_ref, Callback, Html};
 use yewdux::prelude::use_store;
 
 use crate::store::{
-    dialog_message::DialogMessage, dialog_store::DialogStore, input_content::InputContent,
+    dialog_message::DialogMessage, dialog_store::DialogStore, input_content::InputContent, is_requesting::IsRequesting,
 };
 
 const CSS: &str = grass::include!("webpage/src/components/footer/footer.scss");
@@ -40,13 +39,13 @@ pub fn footer() -> Html {
     let (_, dialog_dispatch) = use_store::<DialogStore>();
 
     // when chat requesting, disable send button
-    let is_requesting = use_state(|| false);
+    let (is_req, req_dispatch) = use_store::<IsRequesting>();
 
     let disable_input: bool = {
         if store_state.text.clone() == String::from("") {
             true
         } else {
-            *is_requesting
+            is_req.value
         }
     };
 
@@ -71,7 +70,7 @@ pub fn footer() -> Html {
         let state = store_state.clone();
         let input_dispatch = input_dispatch.clone();
         let dialog_dispatch_clone = dialog_dispatch.clone();
-        let is_requesting = is_requesting.clone();
+        let req_dispatch = req_dispatch.clone();
 
         if state.text.clone() != String::from("") {
             dialog_dispatch_clone.reduce_mut_callback(move |dialog| {
@@ -82,10 +81,12 @@ pub fn footer() -> Html {
                     content: text.clone(),
                 });
 
-                is_requesting.set(true);
+                req_dispatch.reduce_mut(|req| {
+                    req.set(true);
+                });
 
                 let mut dialog = dialog.clone();
-                let is_requesting = is_requesting.clone();
+                let req_dispatch = req_dispatch.clone();
                 let input_dispatch = input_dispatch.clone();
                 let dialog_dispatch = dialog_dispatch.clone();
 
@@ -93,36 +94,39 @@ pub fn footer() -> Html {
                     input.clear();
                 });
 
-                // spawn_local(async move {
-                //     match dialog.request_dialog(text.clone()).await {
-                //         Ok(text) => {
-                //             is_requesting.set(false);
-                //             dialog_dispatch.reduce_mut(|dialog| {
-                //                 dialog.insert_dialog(
-                //                     DialogMessage {
-                //                         role: String::from("assistant"),
-                //                         content: text
-                //                     }
-                //                 )
-                //             })
-                //         },
-                //         Err(err) => {
-                //             dialog_dispatch.reduce_mut(|dialog| {
-                //                 dialog.insert_dialog(
-                //                     DialogMessage {
-                //                         role: String::from("assistant"),
-                //                         content: err
-                //                     }
-                //                 )
-                //             })
-                //         }
-                //     }
-                // });
+                spawn_local(async move {
+                    match dialog.request_dialog(text.clone()).await {
+                        Ok(text) => {
+                            req_dispatch.reduce_mut(|req| {
+                                req.set(false);
+                            });
+                            dialog_dispatch.reduce_mut(|dialog| {
+                                dialog.insert_dialog(
+                                    DialogMessage {
+                                        role: String::from("assistant"),
+                                        content: text
+                                    }
+                                )
+                            })
+                        },
+                        Err(err) => {
+                            dialog_dispatch.reduce_mut(|dialog| {
+                                dialog.insert_dialog(
+                                    DialogMessage {
+                                        role: String::from("assistant"),
+                                        content: err
+                                    }
+                                )
+                            })
+                        }
+                    }
+                });
             })
         } else {
             Callback::from(move |_| {})
         }
     };
+
 
     html! {
         <div class={stylesheet}>
@@ -136,10 +140,10 @@ pub fn footer() -> Html {
                     <button class="send"
                             disabled={ disable_input }
                             onclick={ send }>
-                            { if *is_requesting {"消息请求中..."} else {"发送"} }
+                            { if is_req.value {"消息请求中..."} else {"发送"} }
                     </button>
                 </div>
-                if *is_requesting{
+                if is_req.value{
                     <div class="requesting">
                         <img src="assets/gifs/qidao.gif" alt="qidao"/>
                         <h2>{"少女祈祷中..."}</h2>
