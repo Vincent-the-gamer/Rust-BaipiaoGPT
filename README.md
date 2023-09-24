@@ -8,6 +8,10 @@
 This chat backend is no longer supporting context now due to some reason.
 
 ## WebAssembly web page
+
+[https://vincent-the-gamer.github.io/baipiaogpt-wasm-page/](https://vincent-the-gamer.github.io/baipiaogpt-wasm-page/)
+
+### Build webpage from source code
 ~~~shell
 cd webpage
 trunk build --release
@@ -17,6 +21,10 @@ Open webpage to chat with AI.
 `WebAssembly` page has no backend server. 
 
 So we can directly deploy it on `GitHub Pages`.
+~~~shell
+# deploy to GitHub Pages
+trunk build --release --public-url /your-github-repo-name/
+~~~
 
 
 ## Use core as http service
