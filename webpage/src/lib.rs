@@ -2,8 +2,9 @@ mod components;
 mod store;
 
 use core::messages;
+
 use stylist::yew::styled_component;
-use yew::{ Html, html, use_effect };
+use yew::{ Html, html, use_effect_with_deps };
 
 use components::{
     header::Header,
@@ -13,21 +14,21 @@ use components::{
 };
 
 use yewdux::prelude::use_store;
-use crate::store::DialogStore;
+use crate::store::dialog_store::DialogStore;
 
 #[styled_component(App)]
 pub fn app() -> Html {
     let (dialog_state, dialog_dispatch) = use_store::<DialogStore>();
 
-    use_effect(move || {
+    use_effect_with_deps(move |_| {
         // onMounted
         dialog_dispatch.reduce_mut(|dialog| {
             dialog.init_dialog();
         });
 
         // onBeforeUnmount
-        // || messages::clear_message()
-    });
+        || messages::clear_message()
+    }, ());
 
     html!{
         <div>

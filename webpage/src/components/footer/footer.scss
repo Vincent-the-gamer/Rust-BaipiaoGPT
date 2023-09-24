@@ -48,7 +48,8 @@ footer{
             position: relative;
             margin: 0 5px;
             height: 50px;
-            width: 100px;
+            width: fit-content;
+            min-width: 100px;
             top: -10px;
             background-color: transparent;
             border-radius: 5px;
@@ -68,6 +69,24 @@ footer{
                 cursor: not-allowed;
             }
         }
-        
+    }
+
+    .requesting{
+        position: absolute;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        top: -85px;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.3);
+        padding: 5px;
+        border-radius: 7px;
+        img{
+            width: 50px;
+            height: 50px;
+        }
+        h2{
+            display: inline;
+        }
     }
 }

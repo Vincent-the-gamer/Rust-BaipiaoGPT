@@ -24,12 +24,12 @@ pub fn dialog_item(props: &Props) -> Html {
 
     html! {
         <div class={stylesheet}>
-            if props.role == "user" {
+            if props.role == String::from("user") || props.role == "user" {
                 <div class="dialog-item">
                     <img src="assets/imgs/avatar_user.jpg" alt="avatar"/>
                     <h3>{ &props.content }</h3>
                 </div>
-            } else if props.role == "assistant" {
+            } else if props.role == String::from("assistant") || props.role == "assistant" {
                 <div class="dialog-item">
                     <img src="assets/imgs/avatar_assistant.jpg" alt="avatar"/>
                     {          

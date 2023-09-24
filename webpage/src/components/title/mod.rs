@@ -5,7 +5,7 @@ use web_sys::{HtmlElement, MouseEvent};
 use yew::{Html, html, Callback};
 use yewdux::prelude::use_store;
 
-use crate::store::InputContent;
+use crate::store::input_content::InputContent;
 
 const CSS: &str = grass::include!("webpage/src/components/title/title.scss");
 

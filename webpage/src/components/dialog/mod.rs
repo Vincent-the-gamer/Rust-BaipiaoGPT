@@ -1,11 +1,11 @@
-use core::{services::clear_context, messages};
+use core::services::clear_context;
 
 use stylist::{yew::styled_component, Style};
 use yew::{Html, html};
 use yewdux::prelude::use_store;
 
 use crate::{
-    store::DialogStore, 
+    store::dialog_store::DialogStore, 
     components::dialog_item::DialogItem
 };
 
