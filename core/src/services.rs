@@ -151,3 +151,10 @@ pub async fn verify_key(api_key: String) -> Result<(), Box<dyn Error>>{
 pub fn clear_context(){
     messages::clear_message();
 }
+
+// 重新生成答案
+pub async fn regenerate(content: &str) -> Result<String, Box<dyn Error>> {
+    messages::remove_last_two_messages();
+    chat(content).await
+}
+
