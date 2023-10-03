@@ -153,8 +153,8 @@ pub fn clear_context(){
 }
 
 // 重新生成答案
-pub async fn regenerate(content: &str) -> Result<String, Box<dyn Error>> {
+pub async fn regenerate() -> Result<String, Box<dyn Error>> {
+    let last_question = messages::get_by_index(messages::len() - 2);
     messages::remove_last_two_messages();
-    chat(content).await
+    chat(last_question.content.as_str()).await
 }
-

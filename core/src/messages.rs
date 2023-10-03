@@ -18,6 +18,11 @@ pub fn get_messages() -> Vec<Message>{
             .to_vec()
 }
 
+pub fn get_by_index(index: usize) -> Message {
+    let messages = MESSAGES.lock().unwrap();
+    messages[index].clone()
+}
+
 pub fn insert_message(message: Message) -> () {
     let mut messages = MESSAGES.lock().unwrap();
     messages.push(message);
